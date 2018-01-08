@@ -1,5 +1,6 @@
 # WSCTimerMac
 World Scholar's Cup Debate Timer for Mac
+![](WSCTimerMac/Assets.xcassets/AppIcon.appiconset/iTunesArtWork%402x.png)
 
 ## License
 
