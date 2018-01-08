@@ -86,10 +86,7 @@ class ViewController: NSViewController {
     }
     
     @IBAction func resetButtonDidPressed(_ sender: NSButton) {
-        phaseCount = 0
-        timer.invalidate()
-        timeLabel.stringValue = "00:00:00"
-        statusLabel.stringValue = setCurrentStatus(PhaseCount: phaseCount)
+        reset()
     }
     
     @objc func updateTime() {
@@ -116,17 +113,27 @@ class ViewController: NSViewController {
         }
     }
     
+    // reset function
+    func reset() {
+        phaseCount = 0
+        let alert = NSAlert()
+        alert.messageText = "Reset?"
+        alert.informativeText = "Do you want to reset?"
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "Yes")
+        alert.addButton(withTitle: "No")
+        if(alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn){
+            phaseCount = 0
+            timer.invalidate()
+            timeLabel.stringValue = "00:00:00"
+            statusLabel.stringValue = setCurrentStatus(PhaseCount: phaseCount)
+        }
+    }
+
     // Check if the phase reach end
     @objc func checkIfEndOfPhase(){
         if statusLabel.stringValue == "End!"{
-            phaseCount = 0
-            //let alert = UIAlertController(title: "Reset?", message: "Do you want to reset?", preferredStyle: UIAlertControllerStyle.alert)
-            //alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { [weak alert] (_) in
-            //    self.resetTimer()
-            //}))
-            //alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil))
-            
-           // self.present(alert, animated: true, completion: nil)
+            reset()
         }
     }
     
